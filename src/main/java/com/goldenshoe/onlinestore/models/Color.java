@@ -8,6 +8,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,6 +27,9 @@ public class Color {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotEmpty(message = "name may not be empty")
+    @Size(min = 2, message = "name must be at least 2 characters long")
     private String name;
 
     @ManyToMany(mappedBy = "sizes", fetch = FetchType.LAZY)

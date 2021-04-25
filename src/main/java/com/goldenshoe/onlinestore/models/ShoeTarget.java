@@ -6,5 +6,6 @@ package com.goldenshoe.onlinestore.models;
 public enum ShoeTarget {
     MEN,
     WOMEN,
+    KIDS,
     UNISEX
 }

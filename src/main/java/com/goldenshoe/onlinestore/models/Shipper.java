@@ -8,6 +8,9 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.Set;
 
@@ -24,7 +27,13 @@ public class Shipper {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotEmpty(message = "name may not be empty")
+    @Size(min = 2, message = "name must be at least 2 characters long")
     private String name;
+
+    @NotEmpty(message = "price may not be empty")
+    @Min(1)
     private double price;
 
     @OneToMany(mappedBy = "shipper", fetch = FetchType.LAZY)

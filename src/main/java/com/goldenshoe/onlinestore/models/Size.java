@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,6 +26,8 @@ public class Size {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Min(1)
     private int size;
 
     @ManyToMany(mappedBy = "sizes", fetch = FetchType.LAZY)

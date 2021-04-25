@@ -8,6 +8,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 /**
@@ -23,6 +25,9 @@ public class Return {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotEmpty(message = "reason may not be empty")
+    @Size(min = 2, message = "reason must be at least 2 characters long")
     private String reason;
 
     @OneToOne(optional = false)

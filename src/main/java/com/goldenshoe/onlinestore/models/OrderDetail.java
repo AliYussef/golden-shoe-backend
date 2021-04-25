@@ -8,6 +8,9 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 /**
@@ -24,6 +27,9 @@ public class OrderDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private double amount;
+
+    @NotEmpty(message = "quantity may not be empty")
+    @Min(1)
     private int quantity;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
