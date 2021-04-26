@@ -30,51 +30,9 @@ public class BootStrap implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        //loadData();
+        loadData();
     }
 
     private void loadData() {
-        //size
-//        Size size = Size.builder()
-//                .size(23)
-//                .build();
-//        sizeRepository.save(size);
-//
-//        //color
-//        Color color = Color.builder()
-//                .name("red")
-//                .build();
-//        colorRepository.save(color);
-//
-//        //shoe
-//        Shoe shoe = Shoe.builder()
-//                .name("Shoes")
-//                .price(55.9)
-//                .stock(100)
-//                .brand("Nike")
-//                .target(ShoeTarget.MEN)
-//                .build();
-//
-//        shoe.setSizes(new HashSet<>(Arrays.asList(size)));
-//        shoe.setColors(new HashSet<>(Arrays.asList(color)));
-//        shoeRepository.save(shoe);
-//
-//        //image
-//        Image image = Image.builder()
-//                .path("/image/one")
-//                .shoe(shoe)
-//                .build();
-//
-//        imageRepository.save(image);
-//
-//        //category
-//        categoryRepository.saveAll(new HashSet<>(Arrays.asList(
-//                Category.builder().shoes(new HashSet<>(Arrays.asList(shoe))).name("sneaker").build(),
-//                Category.builder().name("sandal").build(),
-//                Category.builder().name("heel").build(),
-//                Category.builder().name("boot").build()
-//        )));
-
-
     }
 }
