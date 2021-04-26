@@ -1,2 +1,2 @@
 # golden-shoe-backend
-Golden Shoe backend solution in Java using Spring Boot.
+Golden Shoe online store backend solution in Java using Spring Boot.
