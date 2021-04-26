@@ -1,22 +1,18 @@
 package com.goldenshoe.onlinestore.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 import java.util.Date;
 
 /**
  * Created by aliyussef on 24/04/2021
  */
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -28,13 +24,12 @@ public class OrderDetail {
     private Long id;
     private double amount;
 
-    @NotEmpty(message = "quantity may not be empty")
-    @Min(1)
+    @Min(value = 1, message = "quantity should be bigger than 1")
     private int quantity;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "shoe_id", nullable = false)
-    private Shoe shoe;
+    private ShoeVariant shoeVariant;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "order_id", nullable = false)

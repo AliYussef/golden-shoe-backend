@@ -1,9 +1,6 @@
 package com.goldenshoe.onlinestore.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -17,7 +14,8 @@ import java.util.Set;
 /**
  * Created by aliyussef on 25/04/2021
  */
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -32,8 +30,7 @@ public class Shipper {
     @Size(min = 2, message = "name must be at least 2 characters long")
     private String name;
 
-    @NotEmpty(message = "price may not be empty")
-    @Min(1)
+    @Min(value = 1, message = "price should be bigger than 1")
     private double price;
 
     @OneToMany(mappedBy = "shipper", fetch = FetchType.LAZY)

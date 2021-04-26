@@ -1,9 +1,7 @@
 package com.goldenshoe.onlinestore.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.*;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -17,12 +15,16 @@ import java.util.Set;
 /**
  * Created by aliyussef on 24/04/2021
  */
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
 @Table(name = "categories")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,6 +34,7 @@ public class Category {
     @Size(min = 2, message = "name must be at least 2 characters long")
     private String name;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "categories_shoes",
             joinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false),

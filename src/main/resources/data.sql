@@ -24,43 +24,31 @@ values (1, 'Sneaker', current_timestamp, current_timestamp),
 
 -- Shoes --
 insert into shoes
-    (id, name, price, stock, brand, target, created_at, updated_at)
-values (1, 'Valen', 80.99, 100, 'British Nights', 'Men', current_timestamp, current_timestamp),
-       (2, 'Air Max', 100.99, 6, 'Nike', 'Unisex', current_timestamp, current_timestamp),
-       (3, 'Air Force', 66.99, 55, 'Nike', 'Women', current_timestamp, current_timestamp),
-       (4, 'Air Max 90', 99.99, 3, 'Nike', 'Men', current_timestamp, current_timestamp);
+    (id, name, brand, target, created_at, updated_at)
+values (1, 'Valen', 'British Nights', 'MEN', current_timestamp, current_timestamp),
+       (2, 'Air Max', 'Nike', 'UNISEX', current_timestamp, current_timestamp),
+       (3, 'Air Force', 'Nike', 'WOMEN', current_timestamp, current_timestamp),
+       (4, 'Air Max 90', 'Nike', 'MEN', current_timestamp, current_timestamp);
 
--- shoes_sizes --
-insert into shoes_sizes
-    (shoes_id, sizes_id)
-values (1, 1),
-       (1, 2),
-       (1, 3),
-       (1, 4),
-       (2, 1),
-       (2, 2),
-       (2, 3),
-       (3, 4),
-       (3, 1),
-       (4, 2),
-       (4, 3),
-       (4, 4);
-
--- shoes_sizes --
-insert into shoes_colors
-    (shoes_id, colors_id)
-values (1, 1),
-       (1, 2),
-       (1, 3),
-       (1, 4),
-       (2, 1),
-       (2, 2),
-       (2, 3),
-       (3, 4),
-       (3, 1),
-       (4, 2),
-       (4, 3),
-       (4, 4);
+-- shoe_specific --
+insert into shoe_variants
+    (id, price, stock, shoe_id, color_id, size_id, created_at, updated_at)
+values (1, 80.99, 100, 1, 1, 1, current_timestamp, current_timestamp),
+       (2, 100.99, 6, 1, 2, 2, current_timestamp, current_timestamp),
+       (3, 66.99, 55, 1, 3, 3, current_timestamp, current_timestamp),
+       (4, 99.99, 3, 1, 4, 4, current_timestamp, current_timestamp),
+       (5, 80.99, 100, 2, 1, 1, current_timestamp, current_timestamp),
+       (6, 100.99, 6, 2, 2, 2, current_timestamp, current_timestamp),
+       (7, 66.99, 55, 2, 3, 3, current_timestamp, current_timestamp),
+       (8, 99.99, 3, 2, 4, 4, current_timestamp, current_timestamp),
+       (9, 80.99, 100, 3, 1, 1, current_timestamp, current_timestamp),
+       (10, 100.99, 6, 3, 2, 2, current_timestamp, current_timestamp),
+       (11, 66.99, 55, 3, 3, 3, current_timestamp, current_timestamp),
+       (12, 99.99, 3, 3, 4, 4, current_timestamp, current_timestamp),
+       (13, 80.99, 100, 4, 1, 1, current_timestamp, current_timestamp),
+       (14, 100.99, 6, 4, 2, 2, current_timestamp, current_timestamp),
+       (15, 66.99, 55, 4, 3, 3, current_timestamp, current_timestamp),
+       (16, 99.99, 3, 4, 4, 4, current_timestamp, current_timestamp);
 
 -- categories_shoes --
 insert into categories_shoes
@@ -72,15 +60,15 @@ values (1, 1),
 
 -- Images --
 insert into images
-    (id, path, shoe_id, created_at, updated_at)
+    (id, path, shoe_variant_id, created_at, updated_at)
 values (1, 'Sneaker', 1, current_timestamp, current_timestamp),
-       (2, 'Sandal', 1, current_timestamp, current_timestamp),
-       (3, 'Heel', 2, current_timestamp, current_timestamp),
-       (4, 'Boot', 2, current_timestamp, current_timestamp),
-       (5, 'Heel', 3, current_timestamp, current_timestamp),
-       (6, 'Boot', 3, current_timestamp, current_timestamp),
-       (7, 'Heel', 4, current_timestamp, current_timestamp),
-       (8, 'Boot', 4, current_timestamp, current_timestamp);
+       (2, 'Sandal', 2, current_timestamp, current_timestamp),
+       (3, 'Heel', 5, current_timestamp, current_timestamp),
+       (4, 'Boot', 6, current_timestamp, current_timestamp),
+       (5, 'Heel', 9, current_timestamp, current_timestamp),
+       (6, 'Boot', 10, current_timestamp, current_timestamp),
+       (7, 'Heel', 13, current_timestamp, current_timestamp),
+       (8, 'Boot', 14, current_timestamp, current_timestamp);
 
 -- Payment Methods --
 insert into payment_methods
