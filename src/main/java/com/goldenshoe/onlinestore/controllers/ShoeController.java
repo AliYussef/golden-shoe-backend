@@ -3,7 +3,6 @@ package com.goldenshoe.onlinestore.controllers;
 import com.goldenshoe.onlinestore.dtos.ShoeDto;
 import com.goldenshoe.onlinestore.models.ShoeTarget;
 import com.goldenshoe.onlinestore.services.ShoeService;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

@@ -3,10 +3,8 @@ package com.goldenshoe.onlinestore.services;
 import com.goldenshoe.onlinestore.dtos.ShoeDto;
 import com.goldenshoe.onlinestore.exceptions.ResourceNotFoundException;
 import com.goldenshoe.onlinestore.mappers.ShoeMapper;
-import com.goldenshoe.onlinestore.models.Shoe;
 import com.goldenshoe.onlinestore.models.ShoeTarget;
 import com.goldenshoe.onlinestore.repositories.ShoeRepository;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
