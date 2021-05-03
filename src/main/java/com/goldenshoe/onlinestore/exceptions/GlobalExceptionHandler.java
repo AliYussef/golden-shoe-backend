@@ -1,12 +1,15 @@
 package com.goldenshoe.onlinestore.exceptions;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.text.MessageFormat;
 import java.util.Date;
 
 /**
@@ -37,5 +40,36 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .build();
 
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler({
+            VoucherExpiredException.class,
+            VoucherNotActiveException.class,
+            ProductOutOfStockException.class,
+            ProductReturnPeriodExpiredException.class
+    })
+    public final ResponseEntity<Object> handleVoucherExceptions(Exception exception, WebRequest webRequest) {
+        ErrorDetails errorDetails = ErrorDetails.builder()
+                .timestamp(new Date())
+                .message(exception.getMessage())
+                .details(webRequest.getDescription(false))
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .build();
+
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers,
+                                                                  HttpStatus status, WebRequest request) {
+        ErrorDetails errorDetails = ErrorDetails.builder()
+                .timestamp(new Date())
+                .message("Validation failed.")
+                .details(MessageFormat.format("Property {0}: {1}", ex.getBindingResult().getFieldError().getField(),
+                        ex.getBindingResult().getFieldError().getDefaultMessage()))
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .build();
+
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
 }
