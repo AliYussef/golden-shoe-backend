@@ -1,5 +1,6 @@
 package com.goldenshoe.onlinestore.dtos;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import javax.validation.constraints.Min;
@@ -8,7 +9,7 @@ import javax.validation.constraints.Min;
  * Created by aliyussef on 26/04/2021
  */
 @Data
-public class SizeDto {
-    @Min(value = 1, message = "size should be bigger than 1")
+@ApiModel(description = "Size response body")
+public class SizeResponse {
     private int size;
 }

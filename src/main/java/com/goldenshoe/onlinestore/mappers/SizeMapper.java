@@ -1,6 +1,6 @@
 package com.goldenshoe.onlinestore.mappers;
 
-import com.goldenshoe.onlinestore.dtos.SizeDto;
+import com.goldenshoe.onlinestore.dtos.SizeResponse;
 import com.goldenshoe.onlinestore.models.Size;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -12,5 +12,5 @@ import org.mapstruct.factory.Mappers;
 public interface SizeMapper {
     SizeMapper INSTANCE = Mappers.getMapper(SizeMapper.class);
 
-    SizeDto sizeToSizeDto(Size size);
+    SizeResponse toSizeResponse(Size size);
 }

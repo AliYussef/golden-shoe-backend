@@ -1,5 +1,6 @@
 package com.goldenshoe.onlinestore.dtos;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import javax.validation.constraints.Min;
@@ -9,12 +10,12 @@ import java.util.Set;
  * Created by aliyussef on 26/04/2021
  */
 @Data
-public class ShoeVariantDto {
+@ApiModel(description = "Product Variant response body")
+public class ProductVariantResponse {
     private Long id;
-    @Min(value = 1, message = "price should be bigger than 1")
     private double price;
     private long stock;
-    private Set<ImageDto> images;
-    private ColorDto color;
-    private SizeDto size;
+    private Set<ImageResponse> images;
+    private ColorResponse color;
+    private SizeResponse size;
 }

@@ -1,6 +1,6 @@
 package com.goldenshoe.onlinestore.mappers;
 
-import com.goldenshoe.onlinestore.dtos.ColorDto;
+import com.goldenshoe.onlinestore.dtos.ColorResponse;
 import com.goldenshoe.onlinestore.models.Color;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -12,5 +12,5 @@ import org.mapstruct.factory.Mappers;
 public interface ColorMapper {
     ColorMapper INSTANCE = Mappers.getMapper(ColorMapper.class);
 
-    ColorDto colorToColorDto(Color color);
+    ColorResponse toColorResponse(Color color);
 }
