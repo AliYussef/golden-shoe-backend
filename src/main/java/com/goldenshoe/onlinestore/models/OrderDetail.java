@@ -1,5 +1,8 @@
 package com.goldenshoe.onlinestore.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -18,24 +21,30 @@ import java.util.Date;
 @Builder
 @Entity
 @Table(name = "order_details")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class OrderDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private double amount;
 
+    @Builder.Default
     @Min(value = 1, message = "quantity should be bigger than 1")
-    private int quantity;
+    private int quantity = 1;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "shoe_id", nullable = false)
-    private ShoeVariant shoeVariant;
+    @JoinColumn(name = "product_variant_id", nullable = false)
+    private ProductVariant productVariant;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "order_id", nullable = false)
     private Order order;
 
-    @OneToOne(mappedBy = "orderDetail", cascade = CascadeType.ALL)
+    @OneToOne
+    @JoinColumn(name = "item_return_id")
     private Return itemReturn;
 
     @CreationTimestamp

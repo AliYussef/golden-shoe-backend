@@ -1,5 +1,8 @@
 package com.goldenshoe.onlinestore.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -21,6 +24,9 @@ import java.util.Set;
 @Builder
 @Entity
 @Table(name = "shippers")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Shipper {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,6 +39,10 @@ public class Shipper {
     @Min(value = 1, message = "price should be bigger than 1")
     private double price;
 
+    @Min(value = 1, message = "Delivery Duration In Days should be bigger than 1")
+    private int deliveryDurationInDays;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "shipper", fetch = FetchType.LAZY)
     private Set<Order> orders;
 

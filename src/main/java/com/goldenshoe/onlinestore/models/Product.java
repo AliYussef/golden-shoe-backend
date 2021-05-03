@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -22,11 +23,11 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "shoes")
+@Table(name = "products")
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id")
-public class Shoe {
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -39,15 +40,22 @@ public class Shoe {
     @Size(min = 2, message = "brand must be at least 2 characters long")
     private String brand;
 
-    @OneToMany(mappedBy = "shoe", fetch = FetchType.LAZY)
-    private Set<ShoeVariant> shoeVariants;
+    @NotEmpty(message = "imagePath may not be empty")
+    @Size(min = 2, message = "imagePath must be at least 2 characters long")
+    private String imagePath;
+
+    @Min(value = 1, message = "price should be bigger than 1")
+    private double price;
+
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    private Set<ProductVariant> productVariants;
 
     @Builder.Default
-    @ManyToMany(mappedBy = "shoes", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
     private Set<Category> categories = new HashSet<>();
 
     @Enumerated(value = EnumType.STRING)
-    private ShoeTarget target;
+    private ProductTarget target;
 
     @CreationTimestamp
     private Date createdAt;

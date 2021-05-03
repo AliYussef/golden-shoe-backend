@@ -1,5 +1,8 @@
 package com.goldenshoe.onlinestore.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -20,6 +23,9 @@ import java.util.Set;
 @Builder
 @Entity
 @Table(name = "addresses")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,13 +50,16 @@ public class Address {
     @Size(min = 2, max = 32, message = "country must be between 2 and 32 characters long")
     private String country;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "billingAddress", fetch = FetchType.LAZY)
     private Set<Order> orders;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "shippingAddress", fetch = FetchType.LAZY)
     private Set<Order> orders2;
 

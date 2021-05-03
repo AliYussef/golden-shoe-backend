@@ -36,10 +36,10 @@ public class Category {
 
     @JsonIgnore
     @ManyToMany
-    @JoinTable(name = "categories_shoes",
+    @JoinTable(name = "categories_products",
             joinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "shoe_id", referencedColumnName = "id", nullable = false))
-    private Set<Shoe> shoes = new HashSet<>();
+            inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id", nullable = false))
+    private Set<Product> products = new HashSet<>();
 
     @CreationTimestamp
     private Date createdAt;

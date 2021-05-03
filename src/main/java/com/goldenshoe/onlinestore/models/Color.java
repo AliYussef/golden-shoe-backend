@@ -37,7 +37,7 @@ public class Color {
 
     @JsonIgnore
     @OneToMany(mappedBy = "color", fetch = FetchType.LAZY)
-    private Set<ShoeVariant> shoeVariants;
+    private Set<ProductVariant> productVariants;
 
     @CreationTimestamp
     private Date createdAt;

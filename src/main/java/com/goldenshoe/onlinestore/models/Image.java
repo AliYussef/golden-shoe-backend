@@ -34,8 +34,8 @@ public class Image {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "shoe_variant_id", nullable = false)
-    private ShoeVariant shoeVariant;
+    @JoinColumn(name = "product_variant_id", nullable = false)
+    private ProductVariant productVariant;
 
     @CreationTimestamp
     private Date createdAt;
