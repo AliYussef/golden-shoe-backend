@@ -45,6 +45,9 @@ public class ReturnServiceImpl implements ReturnService {
                 .build();
     }
 
+    /**
+     * Process the return request.
+     */
     private void processReturnRequest(ReturnRequest request) {
         OrderDetail orderDetail = getOrderDetail(request.getOrderDetailId());
 
@@ -72,6 +75,9 @@ public class ReturnServiceImpl implements ReturnService {
                         .format("Order detail with Id: {0} has already been used!", id)));
     }
 
+    /**
+     * Check if the return request is valid by comparing order date with store return policy period.
+     */
     private boolean checkReturnValidity(LocalDate orderCreatedDate) {
         return orderCreatedDate.plusDays(storePolicy.getReturnPeriod()).isBefore(LocalDate.now()) ||
                 orderCreatedDate.plusDays(storePolicy.getReturnPeriod()).isEqual(LocalDate.now());

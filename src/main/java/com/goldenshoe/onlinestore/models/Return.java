@@ -31,10 +31,6 @@ public class Return {
     @Enumerated(value = EnumType.STRING)
     private ReturnReason reason;
 
-//    @JsonIgnore
-//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private Set<OrderDetail> orderDetail;
-
     @JsonIgnore
     @OneToOne(mappedBy = "itemReturn",cascade = CascadeType.ALL)
     private OrderDetail orderDetail;

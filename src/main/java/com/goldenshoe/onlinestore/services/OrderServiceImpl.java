@@ -76,6 +76,9 @@ public class OrderServiceImpl implements OrderService {
                 .build();
     }
 
+    /**
+     * Process products and store them individually bases on quantity, and calculate total price.
+     */
     private void processProducts(List<OrderDetailRequest> orderDetailsRequest, Order order) {
         Set<OrderDetail> orderDetails = new HashSet<>();
         double amount = 0;
@@ -112,6 +115,9 @@ public class OrderServiceImpl implements OrderService {
         order.setTotalAmount(Math.round(totalAmount * 100.0) / 100.0);
     }
 
+    /**
+     * Check if voucher was added and deduct its discount from the total price.
+     */
     private void checkVoucherDiscount(Long voucherId, Order order) {
         if (voucherId <= 0) return;
         Voucher voucher = voucherRepository
@@ -123,6 +129,9 @@ public class OrderServiceImpl implements OrderService {
         order.setVoucher(Voucher.builder().id(voucher.getId()).build());
     }
 
+    /**
+     * Calculate the expected delivery date based on the selected shipper.
+     */
     private LocalDate getExpectedDeliveryDate(Long shipperId) {
         Shipper shipper = shipperRepository.findById(shipperId).orElseThrow(() ->
                 new ResourceNotFoundException(MessageFormat.format("Shipper with Id: {0} does not exist!", shipperId)));

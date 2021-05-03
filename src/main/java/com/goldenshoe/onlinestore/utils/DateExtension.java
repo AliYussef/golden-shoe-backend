@@ -9,6 +9,9 @@ import java.util.Date;
  */
 public final class DateExtension {
 
+    /**
+     * Convert Date to LocalDate.
+     */
     public static LocalDate convertToLocalDateViaInstant(Date dateToConvert) {
         return dateToConvert.toInstant()
                 .atZone(ZoneId.systemDefault())
