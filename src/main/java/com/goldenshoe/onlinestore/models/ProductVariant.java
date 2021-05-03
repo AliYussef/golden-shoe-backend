@@ -21,11 +21,11 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "shoe_variants")
+@Table(name = "product_variants")
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id")
-public class ShoeVariant {
+public class ProductVariant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,14 +38,14 @@ public class ShoeVariant {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "shoe_id", nullable = false)
-    private Shoe shoe;
+    @JoinColumn(name = "product_id", nullable = false)
+    private Product product;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "shoeVariant", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "productVariant", fetch = FetchType.LAZY)
     private Set<OrderDetail> orderDetails;
 
-    @OneToMany(mappedBy = "shoeVariant", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "productVariant", fetch = FetchType.LAZY)
     private Set<Image> images;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
