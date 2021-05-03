@@ -1,12 +1,13 @@
 package com.goldenshoe.onlinestore.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 import java.util.Date;
 
 /**
@@ -19,17 +20,23 @@ import java.util.Date;
 @Builder
 @Entity
 @Table(name = "returns")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Return {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "reason may not be empty")
-    @Size(min = 2, message = "reason must be at least 2 characters long")
-    private String reason;
+    @Enumerated(value = EnumType.STRING)
+    private ReturnReason reason;
 
-    @OneToOne(optional = false)
-    @JoinColumn(name = "order_detail_id", nullable = false)
+//    @JsonIgnore
+//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private Set<OrderDetail> orderDetail;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "itemReturn",cascade = CascadeType.ALL)
     private OrderDetail orderDetail;
 
     @CreationTimestamp
