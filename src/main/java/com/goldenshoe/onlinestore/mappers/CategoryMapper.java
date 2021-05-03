@@ -1,6 +1,6 @@
 package com.goldenshoe.onlinestore.mappers;
 
-import com.goldenshoe.onlinestore.dtos.CategoryDto;
+import com.goldenshoe.onlinestore.dtos.CategoryResponse;
 import com.goldenshoe.onlinestore.models.Category;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -12,5 +12,5 @@ import org.mapstruct.factory.Mappers;
 public interface CategoryMapper {
     CategoryMapper INSTANCE = Mappers.getMapper(CategoryMapper.class);
 
-    CategoryDto categoryToCategoryDto(Category category);
+    CategoryResponse toCategoryResponse(Category category);
 }
